@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 
 public class HomeFragment extends Fragment {
@@ -58,6 +59,9 @@ public class HomeFragment extends Fragment {
 
             String dayKey = keyFormat.format(calendar.getTime());
             dayKeys.add(dayKey);
+
+            boolean isToday = (i == 3);
+
             if (i == selectedIndex) {
                 selectedDayKey = dayKey;
             }
@@ -69,7 +73,11 @@ public class HomeFragment extends Fragment {
                 number.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
                 updateHeader(view, calendar);
             } else {
-                dayView.setBackgroundResource(0);
+                if (isToday) {
+                    dayView.setBackgroundResource(R.drawable.day_current_background);
+                } else {
+                    dayView.setBackgroundResource(0);
+                }
                 letter.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_inactive));
                 number.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
             }
@@ -83,6 +91,9 @@ public class HomeFragment extends Fragment {
                     TextView n = lastSelectedView.findViewById(R.id.day_number);
                     l.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_inactive));
                     n.setTextColor(ContextCompat.getColor(requireContext(), R.color.black));
+                    if (selectedIndex == 3) {
+                        lastSelectedView.setBackgroundResource(R.drawable.day_current_background);
+                    }
                 }
                 v.setBackgroundResource(R.drawable.button_rounded);
                 letter.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
@@ -118,6 +129,8 @@ public class HomeFragment extends Fragment {
     }
 
     public void loadTasks() {
+        SimpleDateFormat keyFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        keyFormat.setTimeZone(TimeZone.getDefault());
         String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         FirebaseFirestore.getInstance()
                 .collection("users")
@@ -171,6 +184,7 @@ public class HomeFragment extends Fragment {
 
         if (diffDays == 0) {
             SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+            hourFormat.setTimeZone(TimeZone.getDefault());
             dayHour.setText(hourFormat.format(Calendar.getInstance().getTime()));
         } else if (diffDays == -1) {
             dayHour.setText("Ayer");

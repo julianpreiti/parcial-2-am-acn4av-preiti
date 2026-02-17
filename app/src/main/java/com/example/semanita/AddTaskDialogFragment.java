@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class AddTaskDialogFragment extends DialogFragment {
     private TaskAdapter.OnTaskCompletedListener listener;
@@ -45,6 +46,7 @@ public class AddTaskDialogFragment extends DialogFragment {
         List<String> dayKeys = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd/MM", new Locale("es"));
         SimpleDateFormat keyFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        keyFormat.setTimeZone(TimeZone.getDefault());
         Calendar cal = Calendar.getInstance();
         for (int i = 0; i < 8; i++) {
             days.add(sdf.format(cal.getTime()));
