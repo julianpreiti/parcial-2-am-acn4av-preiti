@@ -1,4 +1,4 @@
-package com.example.semanita;
+package com.app.semanita;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.semanita.databinding.ActivityMainBinding;
+import com.app.semanita.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {

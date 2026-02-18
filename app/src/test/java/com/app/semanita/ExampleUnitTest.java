@@ -1,4 +1,4 @@
-package com.example.semanita;
+package com.app.semanita;
 
 import org.junit.Test;
 

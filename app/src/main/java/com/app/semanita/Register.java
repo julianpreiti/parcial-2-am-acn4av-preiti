@@ -1,4 +1,4 @@
-package com.example.semanita;
+package com.app.semanita;
 
 import android.content.Intent;
 import android.os.Bundle;

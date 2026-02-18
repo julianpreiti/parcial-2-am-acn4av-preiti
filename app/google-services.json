@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "559957666310",
+    "project_id": "semanita-acn4",
+    "storage_bucket": "semanita-acn4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559957666310:android:80da6dd03fd4b70c8ef187",
+        "android_client_info": {
+          "package_name": "com.app.semanita"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg3TIeNTc9hEPYO6aBY2tDOkmjQu0F520"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

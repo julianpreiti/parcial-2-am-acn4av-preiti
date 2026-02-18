@@ -1,4 +1,4 @@
-package com.example.semanita;
+package com.app.semanita;
 
 public class Task {
     public String id;
@@ -7,6 +7,7 @@ public class Task {
     public int minutes;
     public String day;
     public boolean completed;
+    public long createdAt;
 
     public Task() {}
 }
