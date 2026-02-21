@@ -39,8 +39,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         Task task = tasks.get(position);
         holder.title.setText(task.title);
         holder.description.setText(task.description);
-        holder.time.setText(task.minutes + " Minutos");
-        holder.timeText.setText(task.minutes + "m");
+        holder.time.setText(task.minutes + " " + holder.itemView.getContext().getString(R.string.minutes_suffix));
+        holder.timeText.setText(task.minutes + holder.itemView.getContext().getString(R.string.minutes_short));
         holder.buttonDone.setEnabled(!task.completed);
 
         holder.buttonDone.setOnClickListener(v -> {

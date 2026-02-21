@@ -59,9 +59,9 @@ public class AddTaskDialogFragment extends DialogFragment {
         spinnerDay.setAdapter(adapter);
 
         return new AlertDialog.Builder(requireContext())
-                .setTitle("Añadir Tarea")
+                .setTitle(getString(R.string.add_task_title))
                 .setView(view)
-                .setPositiveButton("Guardar", (dialog, which) -> {
+                .setPositiveButton(getString(R.string.save), (dialog, which) -> {
                     String title = editTitle.getText().toString().trim();
                     String description = editDescription.getText().toString().trim();
                     String minutesStr = editMinutes.getText().toString().trim();
@@ -69,27 +69,27 @@ public class AddTaskDialogFragment extends DialogFragment {
                     String day = dayKeys.get(selectedDayIndex);
 
                     if (title.isEmpty()) {
-                        Toast.makeText(getContext(), "El título no puede estar vacío", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.error_title_empty), Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     if (minutesStr.isEmpty()) {
-                        Toast.makeText(getContext(), "Ingresa los minutos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.error_minutes_empty), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (minutesStr.length() > 2) {
-                        Toast.makeText(getContext(), "Máximo 60 minutos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.error_minutes_max), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     int minutes;
                     try {
                         minutes = Integer.parseInt(minutesStr);
                     } catch (NumberFormatException e) {
-                        Toast.makeText(getContext(), "Los minutos deben ser un número", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.error_minutes_invalid), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (minutes < 1 || minutes > 60) {
-                        Toast.makeText(getContext(), "Máximo 60 minutos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.error_minutes_max), Toast.LENGTH_SHORT).show();
                         return;
                     }
 
@@ -114,10 +114,10 @@ public class AddTaskDialogFragment extends DialogFragment {
                                     Bundle result = new Bundle();
                                     result.putString("day", day);
                                     getParentFragmentManager().setFragmentResult("task_added", result);
-                                }
-                            });
+                            }
+                        });
                 })
-                    .setNegativeButton("Cancelar", null)
+                    .setNegativeButton(getString(R.string.cancel), null)
                     .create();
     }
 }

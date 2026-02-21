@@ -75,11 +75,11 @@ public class Login extends AppCompatActivity {
                 String password = String.valueOf(editTextPassword.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Login.this, "Es necesario un correo electrónico", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, getString(R.string.error_email_required), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Login.this, "Es necesaria una contraseña", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, getString(R.string.error_password_required), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
@@ -91,12 +91,12 @@ public class Login extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Ingresaste correctamente", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), getString(R.string.login_success), Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(Login.this, "Algo falló, revisa tus datos",
+                                    Toast.makeText(Login.this, getString(R.string.login_error),
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }

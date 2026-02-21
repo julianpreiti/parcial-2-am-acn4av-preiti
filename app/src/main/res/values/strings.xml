@@ -21,4 +21,50 @@
     <string name="tareas">Tareas</string>
     <string name="tiempo">Tiempo</string>
     <string name="boton">boton</string>
+
+    <!-- AddTaskDialogFragment -->
+    <string name="add_task_title">Añadir Tarea</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="error_title_empty">El título no puede estar vacío</string>
+    <string name="error_minutes_empty">Ingresa los minutos</string>
+    <string name="error_minutes_max">Máximo 60 minutos</string>
+    <string name="error_minutes_invalid">Los minutos deben ser un número</string>
+
+    <!-- Login -->
+    <string name="error_email_required">Es necesario un correo electrónico</string>
+    <string name="error_password_required">Es necesaria una contraseña</string>
+    <string name="login_success">Ingresaste correctamente</string>
+    <string name="login_error">Algo falló, revisa tus datos</string>
+
+    <!-- Register -->
+    <string name="error_confirm_password_required">Es necesario que nos las repitas</string>
+    <string name="error_passwords_mismatch">Las contraseñas no coinciden</string>
+    <string name="register_success">Cuenta creada con éxito.</string>
+    <string name="register_error">Ups, algo salió mal.</string>
+
+    <!-- MainActivity -->
+    <string name="error_login_required">Tenes que iniciar sesión para agregar tareas</string>
+
+    <!-- TaskAdapter / HistoryAdapter -->
+    <string name="minutes_suffix">Minutos</string>
+    <string name="minutes_short">m</string>
+
+    <!-- HomeFragment -->
+    <string name="tasks_label">Tareas: %d</string>
+    <string name="yesterday">Ayer</string>
+    <string name="days_ago">Hace %d días</string>
+    <string name="tomorrow">Mañana</string>
+    <string name="in_days">En %d días</string>
+
+    <!-- Week Day -->
+    <string-array name="days_letters">
+        <item>D</item>
+        <item>L</item>
+        <item>M</item>
+        <item>M</item>
+        <item>J</item>
+        <item>V</item>
+        <item>S</item>
+    </string-array>
 </resources>

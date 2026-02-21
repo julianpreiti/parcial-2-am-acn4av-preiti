@@ -64,7 +64,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             taskHolder.title.setText(task.title);
             taskHolder.description.setText(task.description);
-            taskHolder.time.setText(task.minutes + " Minutos");
+            taskHolder.time.setText(task.minutes + " " + taskHolder.itemView.getContext().getString(R.string.minutes_suffix));
 
             // verificamos si es para restaurar la fecha de hoy o siguientes
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());

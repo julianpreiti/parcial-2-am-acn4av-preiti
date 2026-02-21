@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -3);
 
-        String[] dayLetters = {"D", "L", "M", "M", "J", "V", "S"};
+        String[] dayLetters = getResources().getStringArray(R.array.days_letters);
         SimpleDateFormat dayNumberFormat = new SimpleDateFormat("dd", Locale.getDefault());
 
         for (int i = 0; i < 11; i++) {
@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment {
                     }
                     adapter.notifyDataSetChanged();
                     TextView selectedDay = requireView().findViewById(R.id.selectedDay);
-                    selectedDay.setText("Tareas: " + taskList.size());
+                    selectedDay.setText(getString(R.string.tasks_label, taskList.size()));
                 });
     }
 
@@ -187,13 +187,13 @@ public class HomeFragment extends Fragment {
             hourFormat.setTimeZone(TimeZone.getDefault());
             dayHour.setText(hourFormat.format(Calendar.getInstance().getTime()));
         } else if (diffDays == -1) {
-            dayHour.setText("Ayer");
+            dayHour.setText(getString(R.string.yesterday));
         } else if (diffDays < -1) {
-            dayHour.setText("Hace " + Math.abs(diffDays) + " días");
+            dayHour.setText(getString(R.string.days_ago, Math.abs(diffDays)));
         } else if (diffDays == 1) {
-            dayHour.setText("Mañana");
+            dayHour.setText(getString(R.string.tomorrow));
         } else {
-            dayHour.setText("En " + diffDays + " días");
+            dayHour.setText(getString(R.string.in_days, diffDays));
         }
     }
 }

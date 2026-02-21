@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                     dialog.show(getSupportFragmentManager(), "AddTaskDialog");
                 }
             } else {
-                Toast.makeText(this, "Tenes que iniciar sesión para agregar tareas", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.error_login_required), Toast.LENGTH_SHORT).show();
             }
         });
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {

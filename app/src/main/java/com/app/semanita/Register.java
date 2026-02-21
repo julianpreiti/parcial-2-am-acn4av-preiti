@@ -78,22 +78,22 @@ public class Register extends AppCompatActivity {
                 String confirmPassword = String.valueOf(editTextConfirmPassword.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Register.this, "Es necesario un correo electrónico", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, getString(R.string.error_email_required), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Register.this, "Es necesaria una contraseña", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, getString(R.string.error_password_required), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
                 if (TextUtils.isEmpty(confirmPassword)) {
-                    Toast.makeText(Register.this, "Es necesario que nos las repitas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, getString(R.string.error_confirm_password_required), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
                 if (!password.equals(confirmPassword)) {
-                    Toast.makeText(Register.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, getString(R.string.error_passwords_mismatch), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.GONE);
                     return;
                 }
@@ -104,13 +104,13 @@ public class Register extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(Register.this, "Cuenta creada con éxito.",
+                                    Toast.makeText(Register.this, getString(R.string.register_success),
                                             Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), Login.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(Register.this, "Ups, algo salió mal.",
+                                    Toast.makeText(Register.this, getString(R.string.register_error),
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
