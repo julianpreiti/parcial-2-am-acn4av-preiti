@@ -38,7 +38,7 @@
                 android:text="Descripción"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 android:id="@+id/history_task_time"
@@ -47,7 +47,7 @@
                 android:text="30 Minutos"
                 android:textSize="12sp"
                 android:layout_marginTop="4dp"
-                android:textColor="@android:color/darker_gray" />
+                android:textColor="@color/text_secondary" />
 
         </LinearLayout>
 

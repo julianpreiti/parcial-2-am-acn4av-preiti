@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="@string/cerrar_sesion"
         android:backgroundTint="@color/main"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:layout_marginTop="120dp"/>
 
     </LinearLayout>

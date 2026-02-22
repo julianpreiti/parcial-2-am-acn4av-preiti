@@ -5,14 +5,19 @@
     <color name="main">#FF7648</color>
     <color name="alter">#4DC591</color>
     <color name="alter_90">#E9F4EF</color>
+    <color name="text_primary">#323232</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_inactive">#919191</color>
+
+    <!-- UI -->
     <color name="inactive">#B0B0B0</color>
     <color name="divisor_color">#EFECEC</color>
-    <color name="text_inactive">#919191</color>
-    <color name="done_color">#4DC591</color>}
-    <color name="cat_home">#8F98FF</color>
-
-    <color name="delete_color">#DD6969</color>
     <color name="background">#F7F7F7</color>
     <color name="nav_background">#F2F2F2</color>
-    <color name="H1">#323232</color>
+
+    <!-- estados -->
+    <color name="done_color">#4DC591</color>
+    <color name="delete_color">#DD6969</color>
+
+    <color name="cat_home">#8F98FF</color>
 </resources>
