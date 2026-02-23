@@ -26,11 +26,14 @@ public class MainActivity extends AppCompatActivity {
         // Acá hacemos el evento del fab pero antes verificamos que esté logueado el usuario.
         binding.fab.setOnClickListener(v -> {
             if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                Fragment current = getSupportFragmentManager().findFragmentById(R.id.frame_layout);
-                if (current instanceof HomeFragment) {
-                    AddTaskDialogFragment dialog = new AddTaskDialogFragment(((HomeFragment) current)::loadTasks);
-                    dialog.show(getSupportFragmentManager(), "AddTaskDialog");
-                }
+                AddTaskDialogFragment dialog = new AddTaskDialogFragment(() -> {
+                    // Recargar tareas si estamos en HomeFragment
+                    Fragment current = getSupportFragmentManager().findFragmentById(R.id.frame_layout);
+                    if (current instanceof HomeFragment) {
+                        ((HomeFragment) current).loadTasks();
+                    }
+                });
+                dialog.show(getSupportFragmentManager(), "AddTaskDialog");
             } else {
                 Toast.makeText(this, getString(R.string.error_login_required), Toast.LENGTH_SHORT).show();
             }

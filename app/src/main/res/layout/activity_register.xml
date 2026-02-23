@@ -12,7 +12,7 @@
 
     <TextView
         android:text="@string/crea_tu_cuenta"
-        android:textSize="22sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginTop="124dp"

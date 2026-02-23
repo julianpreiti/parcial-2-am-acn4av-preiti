@@ -2,22 +2,26 @@
 <resources>
     <color name="black">#2B2B2B</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#4CAF50</color>
+    <color name="orange">#FF9800</color>
+    <color name="purple">#9C27B0</color>
+    <color name="blue">#2196F3</color>
     <color name="main">#FF7648</color>
     <color name="alter">#4DC591</color>
     <color name="alter_90">#E9F4EF</color>
     <color name="text_primary">#323232</color>
     <color name="text_secondary">#666666</color>
     <color name="text_inactive">#919191</color>
-
-    <!-- UI -->
+        <!-- UI -->
     <color name="inactive">#B0B0B0</color>
     <color name="divisor_color">#EFECEC</color>
     <color name="background">#F7F7F7</color>
     <color name="nav_background">#F2F2F2</color>
-
-    <!-- estados -->
+     <!-- estados -->
     <color name="done_color">#4DC591</color>
     <color name="delete_color">#DD6969</color>
+    <color name="completed_background">#F1F8F4</color>
+    <color name="incomplete_background">#F0F0F0</color>
 
     <color name="cat_home">#8F98FF</color>
 </resources>

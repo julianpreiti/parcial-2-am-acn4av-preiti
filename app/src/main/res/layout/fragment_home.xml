@@ -11,13 +11,15 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:paddingBottom="126dp"
-        android:clipToPadding="false">
+        android:clipToPadding="false"
+        android:clipChildren="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background"
             android:orientation="vertical"
+            android:clipChildren="false"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="270dp">
 
@@ -189,6 +191,7 @@
                 android:layout_height="match_parent"
                 android:paddingTop="16dp"
                 android:clipToPadding="false"
+                android:clipChildren="false"
                 android:background="@color/white"/>
 
         </LinearLayout>

@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,7 +58,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         HistoryFragment.HistoryItem item = items.get(position);
 
         if (holder instanceof HeaderViewHolder) {
-            ((HeaderViewHolder) holder).dateText.setText(item.formattedDate);
+            HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
+            headerHolder.dayName.setText(item.dayName);
+            headerHolder.dateText.setText(item.formattedDate);
+
+            //  cambiar el color del día si es "Hoy"
+            if (item.isToday) {
+                int mainColor = headerHolder.itemView.getContext().getColor(R.color.main);
+                headerHolder.dayName.setTextColor(mainColor);
+            } else {
+                int blackColor = headerHolder.itemView.getContext().getColor(R.color.black);
+                headerHolder.dayName.setTextColor(blackColor);
+            }
         } else if (holder instanceof TaskViewHolder) {
             TaskViewHolder taskHolder = (TaskViewHolder) holder;
             Task task = item.task;
@@ -66,9 +78,26 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             taskHolder.description.setText(task.description);
             taskHolder.time.setText(task.minutes + " " + taskHolder.itemView.getContext().getString(R.string.minutes_suffix));
 
-            // verificamos si es para restaurar la fecha de hoy o siguientes
+            // Verificar si es hoy
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             String today = dateFormat.format(Calendar.getInstance().getTime());
+            boolean isToday = task.day.equals(today);
+
+            // Cambiar el fondo y mostrar/ocultar etiqueta según si está completada
+            if (task.completed) {
+                taskHolder.cardView.setCardBackgroundColor(taskHolder.itemView.getContext().getColor(R.color.completed_background));
+                // Solo mostrar "Completado" si NO es de hoy
+                if (isToday) {
+                    taskHolder.completedLabel.setVisibility(View.GONE);
+                } else {
+                    taskHolder.completedLabel.setVisibility(View.VISIBLE);
+                }
+            } else {
+                taskHolder.cardView.setCardBackgroundColor(taskHolder.itemView.getContext().getColor(R.color.incomplete_background));
+                taskHolder.completedLabel.setVisibility(View.GONE);
+            }
+
+            // Verifica si es para restaurar la fecha de hoy o siguientes
             boolean canRestore = task.day.compareTo(today) >= 0;
 
             if (canRestore) {
@@ -98,23 +127,28 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     static class HeaderViewHolder extends RecyclerView.ViewHolder {
+        TextView dayName;
         TextView dateText;
 
         HeaderViewHolder(View itemView) {
             super(itemView);
-            dateText = itemView.findViewById(R.id.history_date_header);
+            dayName = itemView.findViewById(R.id.history_day_name);
+            dateText = itemView.findViewById(R.id.history_date);
         }
     }
 
     static class TaskViewHolder extends RecyclerView.ViewHolder {
-        TextView title, description, time;
+        CardView cardView;
+        TextView title, description, time, completedLabel;
         ImageButton buttonRestore;
 
         TaskViewHolder(View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.history_task_card);
             title = itemView.findViewById(R.id.history_task_title);
             description = itemView.findViewById(R.id.history_task_description);
             time = itemView.findViewById(R.id.history_task_time);
+            completedLabel = itemView.findViewById(R.id.history_task_completed_label);
             buttonRestore = itemView.findViewById(R.id.button_restore);
         }
     }

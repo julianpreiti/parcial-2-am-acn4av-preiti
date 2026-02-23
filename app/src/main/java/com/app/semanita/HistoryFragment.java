@@ -53,17 +53,24 @@ public class HistoryFragment extends Fragment {
                 .collection("users")
                 .document(uid)
                 .collection("tasks")
-                .whereEqualTo("completed", true)
                 .orderBy("day", Query.Direction.DESCENDING)
+                .limit(50)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    // aca las agrupamos por dia
+                    //  agrupamos por dia
                     LinkedHashMap<String, List<Task>> tasksByDay = new LinkedHashMap<>();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    String today = dateFormat.format(new Date());
 
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
                         Task task = doc.toObject(Task.class);
                         if (task != null) {
                             task.id = doc.getId();
+
+                            // Excluir tareas de hoy que no están completadas
+                            if (task.day.equals(today) && !task.completed) {
+                                continue;
+                            }
 
                             if (!tasksByDay.containsKey(task.day)) {
                                 tasksByDay.put(task.day, new ArrayList<>());
@@ -74,15 +81,25 @@ public class HistoryFragment extends Fragment {
 
                     historyItems.clear();
                     SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                    SimpleDateFormat outputFormat = new SimpleDateFormat("EEEE d 'de' MMMM", new Locale("es"));
+                    SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", new Locale("es"));
+                    SimpleDateFormat dateFormatDisplay = new SimpleDateFormat("d 'de' MMMM", new Locale("es"));
 
                     for (Map.Entry<String, List<Task>> entry : tasksByDay.entrySet()) {
                         try {
                             Date date = inputFormat.parse(entry.getKey());
-                            String formattedDate = outputFormat.format(date);
-                            formattedDate = formattedDate.substring(0, 1).toUpperCase() + formattedDate.substring(1);
+                            String dayName;
+                            boolean isToday = entry.getKey().equals(today);
 
-                            historyItems.add(new HistoryItem(entry.getKey(), formattedDate, true));
+                            if (isToday) {
+                                dayName = "Hoy";
+                            } else {
+                                dayName = dayFormat.format(date);
+                                dayName = dayName.substring(0, 1).toUpperCase() + dayName.substring(1);
+                            }
+
+                            String dateString = dateFormatDisplay.format(date);
+
+                            historyItems.add(new HistoryItem(entry.getKey(), dayName, dateString, true, isToday));
 
                             for (Task task : entry.getValue()) {
                                 historyItems.add(new HistoryItem(entry.getKey(), task));
@@ -99,21 +116,27 @@ public class HistoryFragment extends Fragment {
     // auxiliares para headers y tasks
     static class HistoryItem {
         String dateKey;
+        String dayName;
         String formattedDate;
         Task task;
         boolean isHeader;
+        boolean isToday;
 
-        // constructor para header y tareas
-        HistoryItem(String dateKey, String formattedDate, boolean isHeader) {
+        // constructor para header
+        HistoryItem(String dateKey, String dayName, String formattedDate, boolean isHeader, boolean isToday) {
             this.dateKey = dateKey;
+            this.dayName = dayName;
             this.formattedDate = formattedDate;
             this.isHeader = isHeader;
+            this.isToday = isToday;
         }
 
+        // constructor para tareas
         HistoryItem(String dateKey, Task task) {
             this.dateKey = dateKey;
             this.task = task;
             this.isHeader = false;
+            this.isToday = false;
         }
     }
 }
